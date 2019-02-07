@@ -87,8 +87,14 @@ class Wizard extends Component {
     });
   };
 
-  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
-  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+  push = (step = this.nextStep) => {
+    const path = `${this.basename}${step}${this.history.location.search}`;
+    this.history.push(path);
+  };
+  replace = (step = this.nextStep) => {
+    const path = `${this.basename}${step}${this.history.location.search}`;
+    this.history.replace(path);
+  };
 
   next = () => {
     if (this.props.onNext) {
